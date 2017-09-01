@@ -154,6 +154,7 @@ class CryptoBot:
             self.send(output=str(self.cryptocurrencies[text]))
 
     def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
-        send_text.push(receiver, output)
+        pass
+        #send_text.push(receiver, output)
 
 print("haha")
