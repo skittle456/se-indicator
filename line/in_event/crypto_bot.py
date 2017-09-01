@@ -10,7 +10,7 @@ import line.out_event
 send_text = line.out_event.TextMessage()
 
 class CryptoBot:
-    def __init__(self, currencies=[]]):
+    def __init__(self, currencies=[]):
         self.bx_url = 'https://bx.in.th/api/'
         self.global_url = 'https://api.coinmarketcap.com/v1/ticker/?convert=THB&limit=20'
         self.headers = {
