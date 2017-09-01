@@ -97,6 +97,7 @@ class CryptoBot:
             self.send(output)
 
     def checkPriceGap(self):
+        print('checkGap called!!')
         used = []
         try:
             for key in self.cryptocurrencies:
