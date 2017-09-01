@@ -5,8 +5,8 @@ send_text = line.out_event.TextMessage()
 
 class TextMessage(object):
     def __init__(self):
-        self.currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
-        self.cryptoBot = CryptoBot(self.currencies)
+        # self.currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+        # self.cryptoBot = CryptoBot(self.currencies)
         print('textMessage been init!!!')
     def core(self, event):
         #nput = event.message.text

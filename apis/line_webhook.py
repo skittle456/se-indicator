@@ -13,7 +13,6 @@ from linebot.models import (
 )
 
 import line.in_event
-
 api = Namespace('line-webhook', description='Line Webhook')
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +22,9 @@ config.read(config_path)
 
 handler = WebhookHandler(config['LINE']['ChannelSecret'])
 
-#text_message = line.in_event.TextMessage()
+text_message = line.in_event.TextMessage()
+currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+cryptoBot = line.in_event.CryptoBot(currencies)
 #follow = line.in_event.Follow()
 
 
