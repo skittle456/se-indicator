@@ -145,5 +145,5 @@ class CryptoBot:
         if text in self.cryptocurrencies:
             self.send(output=str(self.cryptocurrencies[text]))
 
-    def send(self, output, receiver = 'c86005bee32f9d3c4bf55fc49b6b2b1fd'):
+    def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
         send_text.push(receiver, output)
