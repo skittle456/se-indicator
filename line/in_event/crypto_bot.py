@@ -8,6 +8,8 @@ from .crypto_currency import CryptoCurrency
 import line.out_event
 
 send_text = line.out_event.TextMessage()
+currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+cryptoBot = CryptoBot(currencies)
 
 class CryptoBot:
     def __init__(self, currencies=[]):
