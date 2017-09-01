@@ -98,25 +98,22 @@ class CryptoBot:
 
     def checkPriceGap(self):
         print('checkGap called!!')
-        used = []
         try:
             for key in self.cryptocurrencies:
                 global_price = float(self.cryptocurrencies[key].global_price)
                 bx_price = float(self.cryptocurrencies[key].bx_price)
                 gap = max(global_price, bx_price) / min(global_price, bx_price)
-                if key not in used:
-                    if gap > 1.05:
-                        if self.alert[key] % 10 == 0:
-                            output = ""
-                            output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-                            output += "Price Gap Alert: " + str(format(gap, ".5f")) + "%\n"
-                            output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-                            output += str(self.cryptocurrencies[key])
-                            self.send(output)
-                        self.alert[key] += 1
-                    else:
-                        self.alert[key] = 0
-                    used.append(key)
+                if gap > 1.05:
+                    if self.alert[key] % 10 == 0:
+                        output = ""
+                        output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+                        output += "Price Gap Alert: " + str(format(gap, ".5f")) + "%\n"
+                        output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+                        output += str(self.cryptocurrencies[key])
+                        self.send(output)
+                    self.alert[key] += 1
+                else:
+                    self.alert[key] = 0
         except Exception as err:
             self.send(str(err))
 
@@ -153,4 +150,4 @@ class CryptoBot:
             self.send(output=str(self.cryptocurrencies[text]))
 
     def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
-        send_text.push(receiver, 'kwai pun'+output)
+        send_text.push(receiver, output)
