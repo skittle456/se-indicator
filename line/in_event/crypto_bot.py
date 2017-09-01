@@ -10,7 +10,7 @@ import line.out_event
 send_text = line.out_event.TextMessage()
 
 class CryptoBot:
-    def __init__(self, currencies=["BTC", "ETH", "DAS", "OMG", "XRP"]):
+    def __init__(self, currencies=[]]):
         self.bx_url = 'https://bx.in.th/api/'
         self.global_url = 'https://api.coinmarketcap.com/v1/ticker/?convert=THB&limit=20'
         self.headers = {
@@ -99,6 +99,7 @@ class CryptoBot:
 
     def checkPriceGap(self):
         print('checkGap called!!')
+        result = ""
         try:
             for key in self.cryptocurrencies:
                 global_price = float(self.cryptocurrencies[key].global_price)
@@ -111,10 +112,11 @@ class CryptoBot:
                         output += "Price Gap Alert: " + str(format(gap, ".5f")) + "%\n"
                         output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
                         output += str(self.cryptocurrencies[key])
-                        self.send(output)
+                        result +=output
                     self.alert[key] += 1
                 else:
                     self.alert[key] = 0
+                self.send(result)
         except Exception as err:
             self.send(str(err))
 
