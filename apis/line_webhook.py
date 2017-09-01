@@ -23,7 +23,8 @@ config.read(config_path)
 handler = WebhookHandler(config['LINE']['ChannelSecret'])
 
 text_message = line.in_event.TextMessage()
-
+currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+cryptoBot = line.in_event.CryptoBot(currencies)
 #follow = line.in_event.Follow()
 
 
