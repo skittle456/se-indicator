@@ -9,6 +9,6 @@ api = Api(
     # All API metadatas
 )
 api.add_namespace(line_webhook)
-currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
-cryptoBot = CryptoBot(currencies)
-print('cryptoBot created ja')
+#currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+#cryptoBot = CryptoBot(currencies)
+#print('cryptoBot created ja')
