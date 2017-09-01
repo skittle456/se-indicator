@@ -11,4 +11,4 @@ api = Api(
 api.add_namespace(line_webhook)
 #currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
 #cryptoBot = CryptoBot(currencies)
-#print('cryptoBot created ja')
+print('cryptoBot created ja')
