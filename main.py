@@ -5,16 +5,14 @@ from flask import (
 )
 
 from apis import api
-from line.in_event import CryptoBot
+
 config = configparser.ConfigParser()
 config.read('config.ini')
 
 app = Flask(__name__)
 api.init_app(app)
 
-currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
-cryptoBot = CryptoBot(currencies)
-print('cryptoBot created ja')
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
