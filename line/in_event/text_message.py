@@ -2,6 +2,7 @@ import line.out_event
 from .crypto_bot import CryptoBot
 send_text = line.out_event.TextMessage()
 
+print("wtf")
 
 class TextMessage(object):
     def __init__(self):
