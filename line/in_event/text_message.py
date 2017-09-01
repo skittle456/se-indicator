@@ -8,5 +8,6 @@ class TextMessage(object):
 
     def core(self, event):
         text_inp = event.message.text.lower()
-        send_text.push(event.source.user_id, text_inp)
-        print('in_event')
+        #send_text.push(event.source.user_id, text_inp)
+        send_text.reply(event.reply_token, 'ควยปั้น')
+        #print('in_event')
