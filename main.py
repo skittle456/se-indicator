@@ -10,7 +10,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 app = Flask(__name__)
-#api.init_app(app)
+api.init_app(app)
 
 
 @app.after_request
