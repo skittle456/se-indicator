@@ -24,7 +24,7 @@ class CryptoBot:
         self.cryptocurrencies = self.setup(currencies)
         self.alert = self.setupAlert(currencies)
         self.command = "!btc !eth !das !omg !xrp"
-
+        print('cryptobot been init')
         #timer = threading.Thread(target=self.timer)
         #timer.start()
         self.timer()
