@@ -2,7 +2,9 @@ import line.out_event
 from .crypto_bot import CryptoBot
 
 send_text = line.out_event.TextMessage()
-
+currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
+cryptoBot = line.in_event.CryptoBot(currencies)
+print('cryptobot created')
 class TextMessage(object):
     def __init__(self):
         # self.currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
