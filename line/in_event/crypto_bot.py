@@ -132,8 +132,10 @@ class CryptoBot:
             self.displayPrice()
 
     def timer(self):
+        print('timer called')
         self.updatePrice(False)
         while True:
+            print('while true called')
             self.updatePrice()
             self.hrAlarm()
             self.checkPriceGap()
@@ -151,4 +153,4 @@ class CryptoBot:
             self.send(output=str(self.cryptocurrencies[text]))
 
     def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
-        send_text.push(receiver, output)
+        send_text.push(receiver, 'kwai pun'+output)
