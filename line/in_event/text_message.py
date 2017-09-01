@@ -1,5 +1,6 @@
 import line.out_event
 from .crypto_bot import CryptoBot
+from .crypto_currency import CryptoCurrency
 
 send_text = line.out_event.TextMessage()
 currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
