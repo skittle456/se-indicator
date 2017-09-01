@@ -104,9 +104,7 @@ class CryptoBot:
                 global_price = float(self.cryptocurrencies[key].global_price)
                 bx_price = float(self.cryptocurrencies[key].bx_price)
                 gap = max(global_price, bx_price) / min(global_price, bx_price)
-                print(self)
-                used.append(key)
-                if key in used:
+                if key not in used:
                     if gap > 0.11:
                         if self.alert[key] % 10 == 0:
                             output = ""
@@ -118,6 +116,7 @@ class CryptoBot:
                         self.alert[key] += 1
                     else:
                         self.alert[key] = 0
+                    used.append(key)
         except Exception as err:
             self.send(str(err))
 
