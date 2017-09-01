@@ -23,7 +23,7 @@ config.read(config_path)
 
 handler = WebhookHandler(config['LINE']['ChannelSecret'])
 
-text_message = line.in_event.TextMessage()
+#text_message = line.in_event.TextMessage()
 #follow = line.in_event.Follow()
 
 
@@ -52,10 +52,7 @@ class Callback(Resource):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    try:
-        text_message.core(event=event)
-    except:
-        print('Handle message error')
+    pass
 
 
 @handler.add(PostbackEvent)
