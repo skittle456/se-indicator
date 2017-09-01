@@ -1,5 +1,5 @@
 import line.out_event
-from line.in_event import CryptoBot
+from .crypto_bot import CryptoBot
 
 send_text = line.out_event.TextMessage()
 
