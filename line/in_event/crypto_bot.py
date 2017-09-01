@@ -116,7 +116,7 @@ class CryptoBot:
                     self.alert[key] += 1
                 else:
                     self.alert[key] = 0
-                self.send(result)
+            self.send(result)
         except Exception as err:
             self.send(str(err))
 
