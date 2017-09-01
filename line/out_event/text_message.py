@@ -7,7 +7,7 @@ cur_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = os.path.join(os.path.dirname(cur_dir), 'config.ini')
 config = configparser.ConfigParser()
 config.read(config_path)
-
+print('above text out')
 line_bot_api = LineBotApi(config['LINE']['ChannelAccessToken'])
 
 class TextMessage(object):
