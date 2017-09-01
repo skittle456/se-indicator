@@ -113,7 +113,7 @@ class CryptoBot:
                         output += "!!!!!!!!!!!!!!!!!!!!!!!!!\n"
                         output += str(self.cryptocurrencies[key])
                         result +=output
-                    self.alert[key] += 1
+                        self.alert[key] += 1
                 else:
                     self.alert[key] = 0
             self.send(result)
