@@ -22,13 +22,11 @@ class CryptoBot:
             'Connection': 'keep-alive'
         }
         self.cryptocurrencies = self.setup(currencies)
-        self.alert = self.setupAlert(currencies)
+        #self.alert = self.setupAlert(currencies)
         self.command = "!btc !eth !das !omg !xrp"
-        print('cryptobot been init')
-        print(self)
-        timer = threading.Thread(target=self.timer)
-        timer.start()
-        #self.timer()
+        self.updatePrice(False)
+        # timer = threading.Thread(target=self.timer)
+        # timer.start()
 
     def setup(self, currencies):
         cryptocurrencies = {}
@@ -98,7 +96,6 @@ class CryptoBot:
             self.send(output)
 
     def checkPriceGap(self):
-        print('checkGap called!!')
         result = ""
         try:
             for key in self.cryptocurrencies:
@@ -133,10 +130,7 @@ class CryptoBot:
             self.displayPrice()
 
     def timer(self):
-        print('timer called')
-        self.updatePrice(False)
         while True:
-            print('while true called')
             self.updatePrice()
             self.hrAlarm()
             self.checkPriceGap()
@@ -150,10 +144,10 @@ class CryptoBot:
         text = text.replace("!", "").upper()
         if text == "command":
             self.send(output=self.command)
+        elif text == "all":
+            self.displayPrice()
         elif text in self.cryptocurrencies:
             self.send(output=str(self.cryptocurrencies[text]))
 
     def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
         send_text.push("R5a8df70a7425c3c8b60204f8176dcbcc", output)
-
-print("haha")

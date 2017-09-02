@@ -7,9 +7,6 @@ class TextMessage(object):
         self.currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
         self.cryptoBot = CryptoBot(self.currencies)
 
-        print('textMessage been init!!!')
     def core(self, event):
-        print(event.source.user_id)
-        #input = event.message.text
-        #self.cryptoBot.command(input)
-        pass
+        input = event.message.text
+        self.cryptoBot.command(input)
