@@ -9,4 +9,4 @@ class TextMessage(object):
 
     def core(self, event):
         message = event.message.text
-        self.cryptoBot.command(str(message))
+        self.cryptoBot.displayPrice()
