@@ -9,4 +9,6 @@ class TextMessage(object):
 
     def core(self, event):
         message = event.message.text
+        print(type(message))
+        print(message)
         self.cryptoBot.command(message)
