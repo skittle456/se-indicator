@@ -23,7 +23,7 @@ class CryptoBot:
         }
         self.cryptocurrencies = self.setup(currencies)
         #self.alert = self.setupAlert(currencies)
-        self.cmd = "Available Commands: !all !btc !eth !das !omg !xrp"
+        self.cmd = "Available Commands:\n!all !btc !eth !das !omg !xrp"
         self.updatePrice(False)
         # timer = threading.Thread(target=self.timer)
         # timer.start()
