@@ -8,6 +8,7 @@ class TextMessage(object):
         self.cryptoBot = CryptoBot(self.currencies)
 
     def core(self, event):
+        print(event.type)
         if event.type == 'group':
             self.cryptoBot.command(event.message.text, event.source.group_id)
         else:
