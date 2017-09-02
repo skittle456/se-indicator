@@ -118,9 +118,9 @@ class CryptoBot:
         except Exception as err:
             self.send(str(err))
 
-    def displayPrice(self):
+    def displayPrice(self, receiver):
         for currency in self.cryptocurrencies:
-            self.send(str(self.cryptocurrencies[currency]))
+            self.send(str(self.cryptocurrencies[currency]), receiver)
 
     def hrAlarm(self):
         now = datetime.datetime.now()
@@ -134,19 +134,19 @@ class CryptoBot:
             self.checkPriceGap()
             time.sleep(60)
 
-    def command(self, text):
+    def command(self, text, receiver):
         if len(text) == 0:
             return
         if text[0] != "!":
             return
         text = text.replace("!", "").upper()
         if text == "CMD":
-            self.send(output=self.cmd)
+            self.send(self.cmd, receiver)
         elif text == "ALL":
-            self.displayPrice()
+            self.displayPrice(receiver)
         elif text in self.cryptocurrencies:
-            self.send(output=str(self.cryptocurrencies[text]))
+            self.send(str(self.cryptocurrencies[text]), receiver)
 
-    def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
+    def send(self, output, receiver):
         #"R5a8df70a7425c3c8b60204f8176dcbcc"
         send_text.push(receiver, output)
