@@ -54,7 +54,7 @@ class Callback(Resource):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    pass
+    text_message.core(event)
 
 
 @handler.add(PostbackEvent)
