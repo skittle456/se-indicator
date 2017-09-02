@@ -9,6 +9,7 @@ class TextMessage(object):
 
         print('textMessage been init!!!')
     def core(self, event):
-        #nput = event.message.text
+        print(event.source.user_id)
+        #input = event.message.text
         #self.cryptoBot.command(input)
         pass
