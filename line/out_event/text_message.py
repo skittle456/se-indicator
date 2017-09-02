@@ -14,6 +14,7 @@ print("woo")
 
 class TextMessage(object):
     def __init__(self):
+        print("Init")
         return
 
     def reply(self, reply_token, message):
