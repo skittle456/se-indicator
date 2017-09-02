@@ -9,5 +9,5 @@ class TextMessage(object):
 
     def core(self, event):
         input = event.message.text
-        print(input)
+        print("halo" + input)
         self.cryptoBot.command(input)
