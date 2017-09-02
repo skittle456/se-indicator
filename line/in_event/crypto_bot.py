@@ -23,7 +23,7 @@ class CryptoBot:
         }
         self.cryptocurrencies = self.setup(currencies)
         #self.alert = self.setupAlert(currencies)
-        self.command = "!btc !eth !das !omg !xrp"
+        self.cmd = "!btc !eth !das !omg !xrp"
         self.updatePrice(False)
         # timer = threading.Thread(target=self.timer)
         # timer.start()
@@ -147,7 +147,7 @@ class CryptoBot:
         text = text.replace("!", "").upper()
         if text == "command":
             print("cmd")
-            self.send(output=self.command)
+            self.send(output=self.cmd)
         elif text == "all":
             print("all")
             self.displayPrice()
