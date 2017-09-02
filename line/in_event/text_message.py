@@ -8,5 +8,4 @@ class TextMessage(object):
         self.cryptoBot = CryptoBot(self.currencies)
 
     def core(self, event):
-        message = event.message.text
-        self.cryptoBot.command(message)
+        self.cryptoBot.command(event.message.text)

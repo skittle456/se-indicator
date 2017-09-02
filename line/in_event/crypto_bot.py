@@ -23,7 +23,7 @@ class CryptoBot:
         }
         self.cryptocurrencies = self.setup(currencies)
         #self.alert = self.setupAlert(currencies)
-        self.cmd = "!btc !eth !das !omg !xrp"
+        self.cmd = "Available Commands: !all !btc !eth !das !omg !xrp"
         self.updatePrice(False)
         # timer = threading.Thread(target=self.timer)
         # timer.start()
@@ -119,10 +119,8 @@ class CryptoBot:
             self.send(str(err))
 
     def displayPrice(self):
-        output = ""
         for currency in self.cryptocurrencies:
-            output += str(self.cryptocurrencies[currency]) + "\n"
-        self.send(output)
+            self.send(str(self.cryptocurrencies[currency]))
 
     def hrAlarm(self):
         now = datetime.datetime.now()
