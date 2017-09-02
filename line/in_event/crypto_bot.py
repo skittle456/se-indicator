@@ -137,17 +137,25 @@ class CryptoBot:
             time.sleep(60)
 
     def command(self, text):
+        print("incommand")
         if len(text) == 0:
+            print("0")
             return
         if text[1] != "!":
+            print("!!")
             return
         text = text.replace("!", "").upper()
         if text == "command":
+            print("cmd")
             self.send(output=self.command)
         elif text == "all":
+            print("all")
             self.displayPrice()
         elif text in self.cryptocurrencies:
+            print("woo")
             self.send(output=str(self.cryptocurrencies[text]))
+        else:
+            print("None")
 
     def send(self, output, receiver = 'C86005bee32f9d3c4bf55fc49b6b2b1fd'):
         send_text.push("R5a8df70a7425c3c8b60204f8176dcbcc", output)

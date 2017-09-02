@@ -10,11 +10,8 @@ config.read(config_path)
 
 line_bot_api = LineBotApi(config['LINE']['ChannelAccessToken'])
 
-print("woo")
-
 class TextMessage(object):
     def __init__(self):
-        print("Init")
         return
 
     def reply(self, reply_token, message):
