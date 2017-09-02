@@ -145,6 +145,7 @@ class CryptoBot:
             print("!!")
             return
         text = text.replace("!", "").upper()
+        print(text)
         if text == "command":
             print("cmd")
             self.send(output=self.cmd)
