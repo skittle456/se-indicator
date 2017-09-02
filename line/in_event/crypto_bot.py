@@ -141,7 +141,7 @@ class CryptoBot:
         if len(text) == 0:
             print("0")
             return
-        if text[1] != "!":
+        if text[0] != "!":
             print("!!")
             return
         text = text.replace("!", "").upper()
