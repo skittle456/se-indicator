@@ -155,7 +155,7 @@ class CryptoBot:
     def command(self, text, receiver):
         if len(text) == 0:
             return
-        if text[0] != "!":
+        if text[0] == "!":
             text = text.replace("!", "").upper()
             if text == "CMD":
                 self.updatePrice()
@@ -166,7 +166,7 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.send(str(self.cryptocurrencies[text]), receiver)
-        elif text[0] != "#":
+        elif text[0] == "#":
             text = text.replace("#", "").upper()
             if text == "ALL":
                 self.updatePrice()
