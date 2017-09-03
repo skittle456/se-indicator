@@ -134,11 +134,9 @@ class CryptoBot:
     def displayAllGapPrice(self, receiver):
         for currency in self.cryptocurrencies:
             self.send(self.checkPriceGap(currency), receiver)
-            self.send(str(self.cryptocurrencies[currency]), receiver)
 
     def displayGapPrice(self, currency, receiver):
         self.send(self.checkPriceGap(currency), receiver)
-        self.send(str(self.cryptocurrencies[currency]), receiver)
 
     def hrAlarm(self):
         now = datetime.datetime.now()
