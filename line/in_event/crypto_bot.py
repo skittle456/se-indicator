@@ -123,7 +123,7 @@ class CryptoBot:
         bx_price = float(self.cryptocurrencies[key].bx_price)
         gap = (1 - max(global_price, bx_price) / min(global_price, bx_price)) * 100
         output = ""
-        output += "Price Gap Alert: " + str(format(gap, ".5f")) + "%\n"
+        output += "Price Gap: " + str(format(gap, ".5f")) + "%\n"
         output += str(self.cryptocurrencies[key])
         return output
 
