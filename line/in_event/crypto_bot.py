@@ -171,7 +171,7 @@ class CryptoBot:
                 self.displayAllGapPrice(receiver)
             elif text in self.cryptocurrencies:
                 self.updatePrice()
-                self.displayPrice(currency, receiver)
+                self.displayPrice(text, receiver)
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
