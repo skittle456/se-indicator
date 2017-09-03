@@ -23,7 +23,7 @@ class CryptoBot:
         }
         self.cryptocurrencies = self.setup(currencies)
         #self.alert = self.setupAlert(currencies)
-        self.cmd = "Available Commands:\n!all !btc !eth !das !omg !xrp"
+        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp"
         self.updatePrice(False)
         # timer = threading.Thread(target=self.timer)
         # timer.start()
@@ -118,9 +118,27 @@ class CryptoBot:
         except Exception as err:
             self.send(str(err))
 
+    def checkPriceGap(self, key):
+        global_price = float(self.cryptocurrencies[key].global_price)
+        bx_price = float(self.cryptocurrencies[key].bx_price)
+        gap = (1 - max(global_price, bx_price) / min(global_price, bx_price)) * 100
+        output = ""
+        output += "Price Gap Alert: " + str(format(gap, ".5f")) + "%\n"
+        output += str(self.cryptocurrencies[key])
+        return output
+
     def displayPrice(self, receiver):
         for currency in self.cryptocurrencies:
             self.send(str(self.cryptocurrencies[currency]), receiver)
+
+    def displayAllGapPrice(self, receiver):
+        for currency in self.cryptocurrencies:
+            self.send(self.checkPriceGap(currency), receiver)
+            self.send(str(self.cryptocurrencies[currency]), receiver)
+
+    def displayGapPrice(self, currency, receiver):
+        self.send(self.checkPriceGap(currency), receiver)
+        self.send(str(self.cryptocurrencies[currency]), receiver)
 
     def hrAlarm(self):
         now = datetime.datetime.now()
@@ -138,18 +156,26 @@ class CryptoBot:
         if len(text) == 0:
             return
         if text[0] != "!":
-            return
-        text = text.replace("!", "").upper()
-        if text == "CMD":
-            self.updatePrice()
-            self.send(self.cmd, receiver)
-        elif text == "ALL":
-            self.updatePrice()
-            self.displayPrice(receiver)
-        elif text in self.cryptocurrencies:
-            self.updatePrice()
-            self.send(str(self.cryptocurrencies[text]), receiver)
+            text = text.replace("!", "").upper()
+            if text == "CMD":
+                self.updatePrice()
+                self.send(self.cmd, receiver)
+            elif text == "ALL":
+                self.updatePrice()
+                self.displayPrice(receiver)
+            elif text in self.cryptocurrencies:
+                self.updatePrice()
+                self.send(str(self.cryptocurrencies[text]), receiver)
+        elif text[0] != "#":
+            text = text.replace("#", "").upper()
+            if text == "ALL":
+                self.updatePrice()
+                self.displayAllGapPrice(receiver)
+            elif currency in self.cryptocurrencies:
+                self.updatePrice()
+                self.displayPrice(currency, receiver)
 
     def send(self, output, receiver):
-        #"R5a8df70a7425c3c8b60204f8176dcbcc"
+        #C86005bee32f9d3c4bf55fc49b6b2b1fd
+        #R5a8df70a7425c3c8b60204f8176dcbcc
         send_text.push(receiver, output)
