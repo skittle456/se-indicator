@@ -153,6 +153,8 @@ class CryptoBot:
     def command(self, text, receiver):
         if len(text) == 0:
             return
+        if text == "start":
+            self.start()
         if text[0] == "!":
             text = text.replace("!", "").upper()
             if text == "CMD":
@@ -172,6 +174,9 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.displayGapPrice(text, receiver)
+
+    def start(self):
+        print("start")
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
