@@ -20,7 +20,6 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH')
     return response
 
-
 if __name__ == "__main__":
     #app.run(host="0.0.0.0")
     #app.run(host="127.0.0.1")

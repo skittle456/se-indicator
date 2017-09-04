@@ -181,7 +181,8 @@ class CryptoBot:
         print(self)
         if not self.isStart:
             if text != "!start":
-                self.send("Timer is currently disable, please enable it", "U240d56479788aaaa4749161398058a17")
+                pass
+                #self.send("Timer is currently disable, please enable it", "U240d56479788aaaa4749161398058a17")
         if len(text) == 0:
             return
         if text[0] == "!":
