@@ -57,7 +57,7 @@ class CryptoBot:
         global_data = self.getGlobalData()
         return bx_data, global_data
 
-    def updatePrice(self):
+    def updatePrice(self, checkPriceAlert = True):
         try:
             bx_data, global_data = self.getLatestData()
             for key in bx_data:
@@ -73,7 +73,8 @@ class CryptoBot:
                     old_currency = copy.deepcopy(currency)
                     currency.updateGlobal(data["price_thb"], data["price_usd"], data["percent_change_1h"],
                                           data["percent_change_24h"], data["percent_change_7d"])
-                    self.checkPriceAlert(old_currency, currency)
+                    if checkPriceAlert:
+                        self.checkPriceAlert(old_currency, currency)
         except Exception as err:
             self.send(str(err))
 
