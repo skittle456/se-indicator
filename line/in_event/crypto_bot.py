@@ -133,6 +133,8 @@ class CryptoBot:
         except KeyError:
             self.individualAlert[receiver] = self.alert
             self.individualAlert[receiver][currency] = target
+        output = currency + " price alert added at " + str(target)
+        self.send(output, receiver)
 
     def checkPriceAlert(self, old_currency, new_currency):
         for user in self.individualAlert:
