@@ -25,7 +25,7 @@ class CryptoBot:
         self.isStart = False
         self.individualAlert = {}
         self.alert = self.setupAlert(currencies)
-        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp\nAdd Price Alert (This command is unavailable in group): @[currency] [target] ex. @omg 400.01\nCheck Price Alert: @alert"
+        self.cmd = "--- Available Commands ---\nBasic Info:\n!all !btc !eth !das !omg !xrp\nGap Info:\n#all #btc #eth #das #omg #xrp\nAdd Price Alert:\n(This command is unavailable in group)\n@[currency] [target] ex. @omg 400.01\nCheck Price Alert:\n@alert"
         self.updatePrice(False)
 
     def setup(self, currencies):
