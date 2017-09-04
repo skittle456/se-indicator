@@ -179,7 +179,7 @@ class CryptoBot:
 
     def command(self, text, receiver, isGroup):
         if not self.isStart:
-            self.send("Timer is currently disable, please contact admin to manually enable it")
+            self.send("Timer is currently disable, please contact admin to manually enable it", receiver)
         if len(text) == 0:
             return
         if text[0] == "!":
