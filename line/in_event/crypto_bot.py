@@ -202,7 +202,7 @@ class CryptoBot:
                 except ValueError:
                     return
                 if textlist[0] in self.cryptocurrencies:
-                    self.priceAlert(text[0], target, receiver)
+                    self.priceAlert(textlistt[0], target, receiver)
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
