@@ -25,7 +25,7 @@ class CryptoBot:
         self.isStart = False
         self.individualAlert = {}
         self.alert = self.setupAlert(currencies)
-        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp"
+        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp\nAdd Price Alert (This command is not available in group): @[currency] [target] ex. @omg 400.01\nCheck Price Alert: @alert"
         self.updatePrice(False)
 
     def setup(self, currencies):
@@ -118,6 +118,15 @@ class CryptoBot:
         except Exception as err:
             self.send(str(err))
 
+    def displayAlert(self, receiver):
+        output = "Alert List"
+        try:
+            for currency in self.individualAlert[receiver]:
+                output += "\n" + currency + " at " + self.individualAlert[receiver][currency]
+        except KeyError:
+            self.individualAlert[receiver] = self.alert
+        self.send(output, receiver)
+
     def checkPriceGap(self, key):
         global_price = float(self.cryptocurrencies[key].global_price)
         bx_price = float(self.cryptocurrencies[key].bx_price)
@@ -143,7 +152,7 @@ class CryptoBot:
                     old_price = float(old_currency.global_price)
                     new_price = float(new_currency.global_price)
                     if max(old_price, new_price) >= self.individualAlert[user][currency] >= min(old_price, new_price):
-                        output = "Price Alert: " + currency + " reached" + str(new_price)
+                        output = "Price Alert: " + currency + " reached " + str(new_price)
                         self.send(output, user)
                         self.individualAlert[user][currency] = None
 
@@ -169,11 +178,13 @@ class CryptoBot:
             time.sleep(60)
 
     def command(self, text, receiver, isGroup):
+        if not self.isStart:
+            self.send("Timer is currently disable, please contact admin to manually enable it")
         if len(text) == 0:
             return
         if text[0] == "!":
             text = text.replace("!", "").upper()
-            if text == "START" and not self.isStart:
+            if text == "START" and not self.isStart and receiver == "U240d56479788aaaa4749161398058a17":
                 timer = threading.Thread(target=self.timer)
                 timer.start()
             elif text == "CMD":
@@ -195,6 +206,9 @@ class CryptoBot:
                 self.displayGapPrice(text, receiver)
         elif text[0] == "@" and not isGroup:
             text = text.replace("@", "").upper()
+            if text == "ALERT":
+                self.displayAlert(receiver)
+                return
             textlist = text.split()
             if len(textlist) == 2:
                 try:
