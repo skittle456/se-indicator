@@ -166,10 +166,7 @@ class CryptoBot:
             self.updatePrice()
             time.sleep(60)
 
-    def command(self, text, group_id, user_id):
-        receiver = user_id
-        if group_id is None:
-            receiver = group_id
+    def command(self, text, receiver, isGroup):
         if len(text) == 0:
             return
         if text[0] == "!":
@@ -194,7 +191,7 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.displayGapPrice(text, receiver)
-        elif text[0] == "@":
+        elif text[0] == "@" and not isGroup:
             text = text.replace("@", "").upper()
             textlist = text.split()
             if len(textlist) == 2:
