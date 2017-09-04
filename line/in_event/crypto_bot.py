@@ -178,15 +178,17 @@ class CryptoBot:
             time.sleep(60)
 
     def command(self, text, receiver, isGroup):
-        if not self.isStart:
+        if not self.isStart and text != "!start":
             self.send("Timer is currently disable, please contact admin to manually enable it", receiver)
         if len(text) == 0:
             return
         if text[0] == "!":
             text = text.replace("!", "").upper()
             if text == "START" and not self.isStart and receiver == "U240d56479788aaaa4749161398058a17":
+                self.isStart = True
                 timer = threading.Thread(target=self.timer)
                 timer.start()
+                self.send("Timer is now online")
             elif text == "CMD":
                 self.updatePrice()
                 self.send(self.cmd, receiver)
