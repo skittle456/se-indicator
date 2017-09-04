@@ -178,7 +178,7 @@ class CryptoBot:
             time.sleep(60)
 
     def command(self, text, receiver, isGroup):
-        self.send(str(self), "U240d56479788aaaa4749161398058a17")
+        print(self)
         if not self.isStart:
             if text != "!start":
                 self.send("Timer is currently disable, please enable it", "U240d56479788aaaa4749161398058a17")
