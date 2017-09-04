@@ -23,7 +23,8 @@ class CryptoBot:
         }
         self.cryptocurrencies = self.setup(currencies)
         self.isStart = False
-        #self.alert = self.setupAlert(currencies)
+        self.individualAlert = {}
+        self.alert = self.setupAlert(currencies)
         self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp"
         self.updatePrice(False)
 
@@ -36,7 +37,7 @@ class CryptoBot:
     def setupAlert(self, currencies):
         cryptocurrencies = {}
         for currency in currencies:
-            cryptocurrencies[currency] = 0
+            cryptocurrencies[currency] = None
         return cryptocurrencies
 
     def getBXData(self):
@@ -56,7 +57,7 @@ class CryptoBot:
         global_data = self.getGlobalData()
         return bx_data, global_data
 
-    def updatePrice(self, checkRapidlyPriceChange=True):
+    def updatePrice(self):
         try:
             bx_data, global_data = self.getLatestData()
             for key in bx_data:
@@ -72,8 +73,7 @@ class CryptoBot:
                     old_currency = copy.deepcopy(currency)
                     currency.updateGlobal(data["price_thb"], data["price_usd"], data["percent_change_1h"],
                                           data["percent_change_24h"], data["percent_change_7d"])
-                    if checkRapidlyPriceChange:
-                        self.checkPriceRapidlyChange(old_currency, currency)
+                    self.checkPriceAlert(old_currency, currency)
         except Exception as err:
             self.send(str(err))
 
@@ -126,6 +126,24 @@ class CryptoBot:
         output += str(self.cryptocurrencies[key])
         return output
 
+    def priceAlert(self, currency, target, receiver):
+        try:
+            self.individualAlert[receiver][currency] = target
+        except KeyError:
+            self.individualAlert[receiver] = self.alert
+            self.individualAlert[receiver][currency] = target
+
+    def checkPriceAlert(self, old_currency, new_currency):
+        for user in self.individualAlert:
+            for currency in self.individualAlert[user]:
+                if self.individualAlert[user][currency] is not None:
+                    old_price = float(old_currency.global_price)
+                    new_price = float(new_currency.global_price)
+                    if max(old_price, new_price) >= self.individualAlert[user][currency] >= min(old_price, new_price):
+                        output = "Price Alert: " + currency + " reached" + str(new_price)
+                        self.send(output, user)
+                        self.individualAlert[user][currency] = None
+
     def displayPrice(self, receiver):
         for currency in self.cryptocurrencies:
             self.send(str(self.cryptocurrencies[currency]), receiver)
@@ -145,10 +163,12 @@ class CryptoBot:
     def timer(self):
         while True:
             self.updatePrice()
-            self.send("timertest", "R5a8df70a7425c3c8b60204f8176dcbcc")
             time.sleep(60)
 
-    def command(self, text, receiver):
+    def command(self, text, group_id, user_id):
+        receiver = user_id
+        if group_id is None:
+            receiver = group_id
         if len(text) == 0:
             return
         if text[0] == "!":
@@ -173,8 +193,19 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.displayGapPrice(text, receiver)
+        elif text[0] == "@":
+            text = text.replace("@", "").upper()
+            textlist = text.split()
+            if len(textlist) == 2:
+                try:
+                    target = float(textlist[1])
+                except ValueError:
+                    return
+                if textlist[0] in self.cryptocurrencies:
+                    self.priceAlert(text[0], target, receiver)
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
         #R5a8df70a7425c3c8b60204f8176dcbcc
+        #U240d56479788aaaa4749161398058a17
         send_text.push(receiver, output)
