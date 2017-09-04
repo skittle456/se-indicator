@@ -188,7 +188,7 @@ class CryptoBot:
                 self.isStart = True
                 timer = threading.Thread(target=self.timer)
                 timer.start()
-                self.send("Timer is now online")
+                self.send("Timer is now online", receiver)
             elif text == "CMD":
                 self.updatePrice()
                 self.send(self.cmd, receiver)
