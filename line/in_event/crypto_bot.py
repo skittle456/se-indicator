@@ -25,7 +25,7 @@ class CryptoBot:
         self.isStart = False
         self.individualAlert = {}
         self.alert = self.setupAlert(currencies)
-        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp\nAdd Price Alert (This command is not available in group): @[currency] [target] ex. @omg 400.01\nCheck Price Alert: @alert"
+        self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp\nAdd Price Alert (This command is unavailable in group): @[currency] [target] ex. @omg 400.01\nCheck Price Alert: @alert"
         self.updatePrice(False)
 
     def setup(self, currencies):
@@ -204,19 +204,21 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.displayGapPrice(text, receiver)
-        elif text[0] == "@" and not isGroup:
+        elif text[0] == "@":
             text = text.replace("@", "").upper()
             if text == "ALERT":
                 self.displayAlert(receiver)
-                return
-            textlist = text.split()
-            if len(textlist) == 2:
-                try:
-                    target = float(textlist[1])
-                except ValueError:
-                    return
-                if textlist[0] in self.cryptocurrencies:
-                    self.priceAlert(textlist[0], target, receiver)
+            if isGroup:
+                self.send("This command is unavailable in group", receiver)
+            else:
+                textlist = text.split()
+                if len(textlist) == 2:
+                    try:
+                        target = float(textlist[1])
+                    except ValueError:
+                        return
+                    if textlist[0] in self.cryptocurrencies:
+                        self.priceAlert(textlist[0], target, receiver)
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
