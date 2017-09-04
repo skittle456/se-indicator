@@ -22,11 +22,10 @@ class CryptoBot:
             'Connection': 'keep-alive'
         }
         self.cryptocurrencies = self.setup(currencies)
+        self.isStart = False
         #self.alert = self.setupAlert(currencies)
         self.cmd = "Available Commands:\nBasic Info: !all !btc !eth !das !omg !xrp\nGap Info: #all #btc #eth #das #omg #xrp"
         self.updatePrice(False)
-        # timer = threading.Thread(target=self.timer)
-        # timer.start()
 
     def setup(self, currencies):
         cryptocurrencies = {}
@@ -146,18 +145,18 @@ class CryptoBot:
     def timer(self):
         while True:
             self.updatePrice()
-            self.hrAlarm()
-            self.checkPriceGap()
+            self.send("timertest", "R5a8df70a7425c3c8b60204f8176dcbcc")
             time.sleep(60)
 
     def command(self, text, receiver):
         if len(text) == 0:
             return
-        if text == "start":
-            self.start()
         if text[0] == "!":
             text = text.replace("!", "").upper()
-            if text == "CMD":
+            if text == "START" and not self.isStart:
+                timer = threading.Thread(target=self.timer)
+                timer.start()
+            elif text == "CMD":
                 self.updatePrice()
                 self.send(self.cmd, receiver)
             elif text == "ALL":
@@ -174,9 +173,6 @@ class CryptoBot:
             elif text in self.cryptocurrencies:
                 self.updatePrice()
                 self.displayGapPrice(text, receiver)
-
-    def start(self):
-        print("start")
 
     def send(self, output, receiver):
         #C86005bee32f9d3c4bf55fc49b6b2b1fd
