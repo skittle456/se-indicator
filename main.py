@@ -11,7 +11,7 @@ config.read('config.ini')
 
 app = Flask(__name__)
 api.init_app(app)
-
+print('On main')
 
 @app.after_request
 def after_request(response):
