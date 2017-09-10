@@ -7,6 +7,7 @@ currencies = ["BTC", "ETH", "DAS", "OMG", "XRP"]
 class TextMessage(object):
     def __init__(self):
         self.cryptoBot = CryptoBot(currencies)
+        print('TextMessage Init')
 
     def core(self, event):
         if event.source.type == "group":
