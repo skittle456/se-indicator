@@ -25,5 +25,5 @@ $ pip3 install -r requirements.txt
 
 ## Authors
 
-Parin Kobboon
-Jethnithi Techasatian
+- Parin Kobboon
+- Jethnithi Techasatian
